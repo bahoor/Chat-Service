@@ -1,13 +1,12 @@
 # app/models.py
-from pydantic import BaseModel
+from beanie import Document
 from typing import Optional
 from datetime import datetime
 
 # A Pydantic model representing a message
-class MessageDocument(BaseModel):
+class MessageDocument(Document):
     sender: str
     content: str
     timestamp: datetime
-
-    class Config:
-        from_attributes = True  # Updated key for Pydantic V2
+    class Settings:
+        collection = "messages"
