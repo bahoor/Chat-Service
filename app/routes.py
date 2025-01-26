@@ -1,23 +1,24 @@
 # app/routes.py
+from beanie import PydanticObjectId
 from fastapi import APIRouter
 from app.models import MessageDocument
-from datetime import datetime
+from datetime import datetime,UTC
 
 router = APIRouter()
 
 # Example endpoint to send a message
-@router.post("/send-message/")
+@router.post("/message",response_model=MessageDocument)
 async def send_message(message: MessageDocument):
+    message.timestamp = datetime.now(tz=UTC)
     await message.insert()
-    return {"message": message}
+    return message
 
 # Endpoint to get all messages
-@router.get("/get-messages/")
+@router.get("/message",response_model=list[MessageDocument])
 async def get_messages():
-    try:
-        messages = await MessageDocument.find_all().to_list()
-        print(f"Fetched messages: {messages}")
-        return {"messages": messages}
-    except Exception as e:
-        print(f"Error fetching messages: {e}")
-        return {"error": "Failed to fetch messages"}
+    return await MessageDocument.find_all().to_list()
+
+    
+@router.get("/message/{message_id}",response_model=MessageDocument)
+async def get_message(message_id:PydanticObjectId):
+    return await MessageDocument.find_one(MessageDocument.id==message_id)

@@ -9,4 +9,4 @@ class MessageDocument(Document):
     content: str
     timestamp: datetime
     class Settings:
-        collection = "messages"
+        name = "messages"
