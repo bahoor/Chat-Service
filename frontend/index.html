@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Service</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Chat Application</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
 </head>
 <body>
-    <div id="app">
-        <h1>Welcome to the Chat Service</h1>
-        <div id="chat-container">
-            <div id="messages"></div>
-            <input type="text" id="message-input" placeholder="Type your message...">
-            <button id="send-button">Send</button>
+
+    <div class="chat-container">
+        <div id="messages" class="messages">
+            <!-- Messages will be displayed here -->
         </div>
+        
+        <form id="message-form" class="message-form">
+            <input type="text" id="sender" placeholder="Enter your name" required>
+            <textarea id="content" placeholder="Enter your message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
     </div>
-    <script src="script.js"></script>
+
+    <script src="script.js"></script> <!-- Link to your JavaScript file -->
 </body>
 </html>
-

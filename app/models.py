@@ -1,12 +1,13 @@
 # app/models.py
 from beanie import Document
-from typing import Optional
-from datetime import datetime
-
-
+from datetime import datetime, UTC
+from pydantic import Field
+def utcnow():
+    return datetime.now(tz=UTC)
 class MessageDocument(Document):
     sender: str
     content: str
-    timestamp: datetime
+    timestamp: datetime = Field(default_factory=utcnow)
+
     class Settings:
         name = "messages"
