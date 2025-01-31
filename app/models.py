@@ -8,5 +8,3 @@ class MessageDocument(Document):
     sender: str
     content: str
     timestamp: datetime
-    class Settings:
-        name = "messages"
